@@ -9,7 +9,7 @@ const primitive_intersect=(A, B) => {
     return primitive_unique(A.filter(a=> values.indexOf(a.valueOf()) >= 0));
 }
 
-const shallowObjectComparer(a, b) => {
+const shallowObjectComparer=(a, b) => {
     let aIsVal = isDateOrPrimitive(a);
     let bIsVal = isDateOrPrimitive(b);
     if (aIsVal && bIsVal) {

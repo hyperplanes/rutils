@@ -1,12 +1,12 @@
-import {seq2} from './seq2.js';
-export const seq=args=>{
-	if (typeof args === 'number') {
-		return seq2(1, args, 1);
+import {seq_num} from './seq_num.js';
+import {seq_date} from './seq_date.js';
+
+export const seq=(args)=>{
+	if(typeof args==='number'){
+		return seq_num({from:1,by:1,length_out:args});
 	}
-	var from = args['from'];
-	var to = args['to'];
-	var by = args['by'];
-	var length_out = args['length_out'];
-	var along_with = args['along_with'];
-	return seq2(from, to, by, length_out, along_with);
+	if(args.along_with){
+		args.length_out=args.along_with.length;
+	}
+	return args.from instanceof Date || args.to instanceof Date?seq_date(args):seq_num(args);
 }

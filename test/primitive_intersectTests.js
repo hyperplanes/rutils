@@ -1,0 +1,1 @@
+import {primitive_intersect} from "../src/js/primitive_intersect.js";

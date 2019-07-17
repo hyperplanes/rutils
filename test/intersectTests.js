@@ -1,0 +1,1 @@
+import {intersect} from "../src/js/intersect.js";

@@ -1,7 +1,7 @@
 import {unique} from './unique.js';
 import {primitive_unique} from './primitive_unique.js';
 import {isDateOrPrimitive} from './isDateOrPrimitive.js';
-import {shallowObjectComparer} from './shallowObjectComparer.js';
+import {deepEqual} from './deepEqual.js';
 
 const primitive_setdiff=(A, B) =>{
     let values = B.map(x=>x.valueOf());
@@ -17,6 +17,6 @@ export const setdiff=(A, B) => {
     } else if (A.some(x=>x instanceof Array)) {
         throw "setdiff not implemented for Array";
     } else {
-        return unique(A.filter(a=>!B.some(b=>shallowObjectComparer(a, b))));
+        return unique(A.filter(a=>!B.some(b=>deepEqual(a, b))));
     }
 }

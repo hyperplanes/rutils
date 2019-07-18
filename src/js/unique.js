@@ -1,5 +1,5 @@
 import {primitive_unique} from './primitive_unique.js';
-import {shallowObjectComparer} from './shallowObjectComparer.js';
+import {deepEqual} from './deepEqual.js';
 import {isDateOrPrimitive} from './isDateOrPrimitive.js';
 import {isObject} from './isObject.js';
 
@@ -14,7 +14,7 @@ export const unique = A => {
     } else if (A.every(isObject)) {
         let stored = [];
         A.forEach(x=> {
-            if (!stored.some(s=>shallowObjectComparer(s, x))) {
+            if (!stored.some(s=>deepEqual(s, x))) {
                 stored.push(x);
             }
         });

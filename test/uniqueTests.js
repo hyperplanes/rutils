@@ -1,5 +1,6 @@
 import {unique} from "../src/js/unique.js";
-
+//these differ from primitive_unique tests because unique considers two objects as the same if they have all the same property keys and values
+//whereas primitive_unique considers two object references as the same only if they reference the same object
 QUnit.test( "unique", function( assert ) {
 	let object1={
 		foo:'bar'

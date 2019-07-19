@@ -1,5 +1,5 @@
 import {isObject} from './isObject.js';
-export const deepEqual = (A, B,state) =>{
+const deepEqual = (A, B,state) =>{
     if (A === B) {
         return true;
     } else if (A instanceof Date && B instanceof Date) {
@@ -39,3 +39,5 @@ export const deepEqual = (A, B,state) =>{
     //at this point, we know it is not a nested object we can deep-compare, and A!==B
     return false;
 }
+
+export const identical = (A,B) => deepEqual(A,B);

@@ -1,5 +1,5 @@
 import {primitive_unique} from './primitive_unique.js';
-import {deepEqual} from './deepEqual.js';
+import {identical} from './identical.js';
 
 export const unique = A => {
     if (A.length === 0) {
@@ -12,7 +12,7 @@ export const unique = A => {
     let oN=objects.length;
     for (var i = 0; i < oN; i++) {//order matters, want to keep only first instance
         let x=objects[i];
-        if(uniqueObjects.some(y=>deepEqual(x,y))){
+        if(uniqueObjects.some(y=>identical(x,y))){
             duplicateObjects.push(x);
         }else{
             uniqueObjects.push(x);

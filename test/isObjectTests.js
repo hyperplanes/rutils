@@ -1,4 +1,3 @@
-import {isDateOrPrimitive} from "../src/js/isDateOrPrimitive.js";
 import {isObject} from "../src/js/isObject.js";   
 QUnit.test( "null and null", function( assert ) {
 	let A=null;
@@ -47,14 +46,4 @@ QUnit.test( "isObject string", function( assert ) {
 	let A='foobar';
 	let result=isObject(A);
 	assert.equal(result,false);
-});
-QUnit.test( "isDateOrPrimitive date", function( assert ) {
-	let A=new Date();
-	let result=isDateOrPrimitive(A);
-	assert.equal(result,true);
-});
-QUnit.test( "isDateOrPrimitive string", function( assert ) {
-	let A=new Date();
-	let result=isDateOrPrimitive(A);
-	assert.equal(result,true);
 });

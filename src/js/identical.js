@@ -1,6 +1,8 @@
 import {isObject} from './isObject.js';
+import {actuallyNaN} from './actuallyNaN.js';
+
 const deepEqual = (A, B,state) =>{
-    if (A === B) {
+    if (A === B || (actuallyNaN(A) && actuallyNaN(B))) {
         return true;
     } else if (A instanceof Date && B instanceof Date) {
         return A.valueOf() === B.valueOf();

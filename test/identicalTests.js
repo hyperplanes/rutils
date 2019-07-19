@@ -1,5 +1,9 @@
 import {identical} from "../src/js/identical.js";
-
+QUnit.test( "two NaN", function( assert ) {
+	let A=NaN;
+	let B=NaN;
+	assert.equal(identical(A,B),true);
+});
 QUnit.test( "two equal integers", function( assert ) {
 	let A=-1;
 	let B=-1;

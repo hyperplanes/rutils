@@ -69,9 +69,10 @@ let x=seq({to:new Date(),by:"days", length_out:100})[0];
 
 Cumsum takes an array of numbers and returns an array of the cumulative sum
 ```js
+import {seq} from 'src/index.js';
 import {cumsum} from 'src/index.js';
 
-let x=cumsum([1,2,3]); //[1,3,6]
+let x=cumsum(seq(3)); //[1,3,6]
 ```
 
 ### cartesian
@@ -82,14 +83,90 @@ import {cartesian} from 'src/index.js';
 let x=[1,2]
 let y=['a','b'];
 let result=cartesian(x,y);
+// result:
+// [
+// 	[1,'a'],
+// 	[1,'b'],
+// 	[2,'a'],
+// 	[2,'b']
+// ];
 ```
+`cartesian` can handle both primitive types like numbers and strings as well as objects like dates and object literals as elements. Note, however, that it will flatten arrays of arrays, which might not be the behavior you're expecting:
+```js
+let A=[[1,2],[3,4]];
+let B=[
+	['a','b'],
+	['c','d']
+	];
+let result=cartesian(A,B);
+// result:
+// [
+// 		[1,2,'a','b'],
+// 		[1,2,'c','d'],
+// 		[3,4,'a','b'],
+// 		[3,4,'c','d']
+// ]
+```
+### identical
+`identical(x,y)` returns true if the object `x` is deep-equal to the object `y`, and false otherwise. Primitive types (string, number, null, undefined, bigint, symbol, boolean) are compared by strict equality (`===`), dates are compared by `valueOf`, all other objects are compared by comparing keys and values, using recursion for nested objects. 
+```js
+let x={
+	prop1:1,
+	prop2:{
+		nested1:'foo',
+		nested2:'bar',
+		nestedArray:[1,2,3]
+	}
+}
+let y={
+	prop1:1,
+	prop2:{
+		nested1:'foo',
+		nested2:'bar',
+		nestedArray:[1,2,3]
+	}
+}
+let result=identical(x,y); //true
+let result2=identical(NaN,NaN); //also true
+```
+One exception to the above rule is that `NaN` is considered identical to itself, which differs from native javascript where `NaN` is the only value that is not considered equal to itself. This is because rutils intends to treat `NaN` as the javascript analog to R's `NA`.
 
 ### intersect
-
+`intersect(A,B)` returns the elements of an array `A` that are identical to an element in array `B`, as determined by the `itentical` method above. Note that the returned objects are the exact objects that were in `A` and not clones of them.
+```js
+let x={
+	foo:'bar'
+};
+let A=[1,2,x];
+let B=[3,2,x,5];
+let result=intersect(A,B);//returns [2,x];
+let isSameObject=result[1]===x; //returns true, both references point to the same object
+```
 ### setdiff
+`setdiff(A,B)` returns the elements of array `A` that are not identical to any element in array `B`, as determined by the `identical` method above. Works the same as `intersect` in that returned objects are literally elements of `A` and not clones of them.
+```js
+let A=[1,2,3];
+let B=[3,2,4];
+let result=setdiff(A,B); //returns [2,3]
+```
+
 ### union
+`union(A,B)` returns a new array containing all of the unique elements of `A` followed by all the unique elements of `B`. If any two elements are identical, as determined by the `identical` method above, only the first instance will be returned in the resulting array.
+```js
+let x={
+	foo:'bar'
+};
+let A=[1,2,x];
+let B=[3,2,x,5];
+let result=union(A,B);//returns [1,2,x,3,5]
+```
+
 ### unique
-### identical
+`unique(A)` returns the first occurance of each object in array `A`, using the `identical` method above to compare objects.
+```js
+let A=[1,2,3,2,4];
+let result=unique(A); //returns [1,2,3,4]
+```
 
 
 ## Running the tests

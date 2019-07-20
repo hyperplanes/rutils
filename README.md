@@ -3,7 +3,7 @@ A library of javascript functions that implement set and sequence-based operatio
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+This library is written in modern javascript modules, using webpack and babel to transpile to a more browser-compatible code bundle. If you are not developing with javascript modules using the ES6 `import` syntax, it is recommended you use the transpiled bundle instead of the original source code.
 
 ### Running transpiled code in a webpage
 
@@ -65,7 +65,7 @@ import {seq} from 'src/index.js';
 let x=seq({to:new Date(),by:"days", length_out:100})[0];
 ```
 
-### cumsum
+### `cumsum` - cumulative sum over an array
 
 Cumsum takes an array of numbers and returns an array of the cumulative sum
 ```js
@@ -75,7 +75,7 @@ import {cumsum} from 'src/index.js';
 let x=cumsum(seq(3)); //[1,3,6]
 ```
 
-### cartesian
+### `cartesian` - cartesian product of two or more arrays
 cartesian can take any number of arrays as arguments, and will return an array with the cartesian product of the arguments
 ```js
 import {cartesian} from 'src/index.js';
@@ -107,8 +107,8 @@ let result=cartesian(A,B);
 // 		[3,4,'c','d']
 // ]
 ```
-### identical
-`identical(x,y)` returns true if the object `x` is deep-equal to the object `y`, and false otherwise. Primitive types (string, number, null, undefined, bigint, symbol, boolean) are compared by strict equality (`===`), dates are compared by `valueOf`, all other objects are compared by comparing keys and values, using recursion for nested objects. 
+### `identical` - deep equivalence of two objects
+`identical(x,y)` returns true if the object `x` is deep-equal to the object `y`, and false otherwise. Primitive types (string, number, null, undefined, bigint, symbol, boolean) are compared by strict equality (`===`), dates are compared by `valueOf`, while all other objects are compared by comparing keys and values, using recursion for nested objects. 
 ```js
 let x={
 	prop1:1,
@@ -131,7 +131,7 @@ let result2=identical(NaN,NaN); //also true
 ```
 One exception to the above rule is that `NaN` is considered identical to itself, which differs from native javascript where `NaN` is the only value that is not considered equal to itself. This is because rutils intends to treat `NaN` as the javascript analog to R's `NA`.
 
-### intersect
+### `intersect` - set of objects contained in both of two arrays
 `intersect(A,B)` returns the elements of an array `A` that are identical to an element in array `B`, as determined by the `itentical` method above. Note that the returned objects are the exact objects that were in `A` and not clones of them.
 ```js
 let x={
@@ -142,7 +142,7 @@ let B=[3,2,x,5];
 let result=intersect(A,B);//returns [2,x];
 let isSameObject=result[1]===x; //returns true, both references point to the same object
 ```
-### setdiff
+### `setdiff` - difference between two arrays 
 `setdiff(A,B)` returns the elements of array `A` that are not identical to any element in array `B`, as determined by the `identical` method above. Works the same as `intersect` in that returned objects are literally elements of `A` and not clones of them.
 ```js
 let A=[1,2,3];
@@ -150,7 +150,7 @@ let B=[3,2,4];
 let result=setdiff(A,B); //returns [2,3]
 ```
 
-### union
+### `union` - set of objects in either of two arrays
 `union(A,B)` returns a new array containing all of the unique elements of `A` followed by all the unique elements of `B`. If any two elements are identical, as determined by the `identical` method above, only the first instance will be returned in the resulting array.
 ```js
 let x={
@@ -161,7 +161,7 @@ let B=[3,2,x,5];
 let result=union(A,B);//returns [1,2,x,3,5]
 ```
 
-### unique
+### `unique` - get the first instance of each object in an array
 `unique(A)` returns the first occurance of each object in array `A`, using the `identical` method above to compare objects.
 ```js
 let A=[1,2,3,2,4];
@@ -193,7 +193,7 @@ to launch webpack's dev server. Then open a web browser to `http://localhost:808
 
 Note, although this uses QUnit for the unit tests, the command `qunit` won't run the tests because Node.js is not yet compatible with the official ES6 module syntax. Also note that Chrome will refuse to load modular scripts if you open the html file directly in the browser rather than using the dev server.
 
-Every exported function in `src\js` has its own file, and each file has a corresponding `[name]`Tests.js in the `tests` directory, with the exception of the sequence related source files which are all tested together in `tests/seqTests.js`:
+Every exported function has its own file in the `src\js` directory, and each file has a corresponding `test/[name]Tests.js` file in the `test` directory, with the exception of the sequence related source files which are all tested together in `tests/seqTests.js`:
 
 ```
 "standardize_date_units.js"

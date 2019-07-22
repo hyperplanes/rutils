@@ -1,0 +1,1 @@
+export const actuallyNaN=x=>typeof x==='number' && isNaN(x);

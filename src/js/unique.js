@@ -1,24 +1,25 @@
 import {primitive_unique} from './primitive_unique.js';
-import {shallowObjectComparer} from './shallowObjectComparer.js';
-import {isDateOrPrimitive} from './isDateOrPrimitive.js';
-import {isObject} from './isObject.js';
+import {identical} from './identical.js';
 
 export const unique = A => {
     if (A.length === 0) {
         return A;
     }
-    if (A.every(isDateOrPrimitive)) {
-        return primitive_unique(A);
-    } else if (A.some(x=>x instanceof Array)) {
-        throw "unique not implemented for Array";
-    } else if (A.every(isObject)) {
-        let stored = [];
-        A.forEach(x=> {
-            if (!stored.some(s=>shallowObjectComparer(s, x))) {
-                stored.push(x);
-            }
-        });
-        return stored;
+    let result=primitive_unique(A);
+    let objects=result.filter(x=>typeof x==='object' && !(x instanceof Date));
+    let uniqueObjects=[];
+    let duplicateObjects=[];
+    let oN=objects.length;
+    for (var i = 0; i < oN; i++) {//order matters, want to keep only first instance
+        let x=objects[i];
+        if(uniqueObjects.some(y=>identical(x,y))){
+            duplicateObjects.push(x);
+        }else{
+            uniqueObjects.push(x);
+        }
     }
-    throw "unique did not recognize object type";
+    duplicateObjects.forEach(x=>{
+        result.splice(result.indexOf(x),1);
+    });
+    return result;
 }

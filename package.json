@@ -1,7 +1,7 @@
 {
   "name": "rutils",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "A library of javascript functions that implement set and sequence-based operations in a style similar to R",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,17 +10,20 @@
     "start": "webpack-dev-server --hot"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hyperplanes/rutils.git"
+  },
+  "author": "hyperplanes",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "babel-loader": "^8.0.5",
     "prop-types": "^15.7.2",
+    "qunit": "^2.9.2",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.6"
   },
-  "dependencies": {
-    "qunit": "^2.9.2"
-  }
+  "dependencies": {}
 }

@@ -143,7 +143,7 @@ let result=intersect(A,B);//returns [2,x];
 let isSameObject=result[1]===x; //returns true, both references point to the same object
 ```
 ### `setdiff` - difference between two arrays 
-`setdiff(A,B)` returns the elements of array `A` that are not identical to any element in array `B`, as determined by the `identical` method above. Works the same as `intersect` in that returned objects are literally elements of `A` and not clones of them.
+`setdiff(A,B)` returns the distinct elements of array `A` that are not identical to any element in array `B`, as determined by the `identical` method above. Works the same as `intersect` in that returned objects are literally elements of `A` and not clones of them.
 ```js
 let A=[1,2,3];
 let B=[3,2,4];

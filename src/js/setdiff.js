@@ -16,7 +16,7 @@ const primitive_setdiff=(A, B) =>{
 const isNonDateObject=x=>typeof x==='object' && !(x instanceof Date);
 export const setdiff=(A, B) => {
     if (A.length === 0 || B.length === 0) {
-        return A;
+        return unique(A);
     }
     let result=unique(primitive_setdiff(A,B));
 

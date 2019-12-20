@@ -17,13 +17,13 @@
   "author": "hyperplanes",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
     "babel-loader": "^8.0.5",
     "prop-types": "^15.7.2",
-    "qunit": "^2.9.2",
-    "webpack": "^4.30.0",
-    "webpack-cli": "^3.3.6"
+    "qunit": "^2.9.3",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {}
 }

@@ -168,6 +168,24 @@ let A=[1,2,3,2,4];
 let result=unique(A); //returns [1,2,3,4]
 ```
 
+### `max` - get the maximum value in an array
+`max(A)` returns the maximum value across its arguments. `max` differs from native javascript `Math.max` in that it accepts both arrays and objects as arguments and if the maximal value is a date, it will return the original date object and not an integer value.
+```js
+let result1=max([1,2,3],[6,4],5); //returns 6
+let result2=max([1,2,3]); //returns 3
+let result3=max(1,2,3); //returns 3
+
+let a=new Date(2019,1,1);
+let b=new Date(2019,0,1);
+let c=new Date(2019,2,1);
+let result4=max(a,b,c);
+console.log(result4); //prints Fri Mar 01 2019 00:00:00 GMT-0500 (Eastern Standard Time)
+let result5=c===result4; //returns true because max returns the original object
+```
+
+### `min` - get the minimum value in an array
+`min(A)` returns the minimum value across its arguments. Works the same as `max` above.
+
 
 ## Running the tests
 

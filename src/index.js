@@ -6,3 +6,5 @@ export {setdiff} from './js/setdiff.js';
 export {unique} from './js/unique.js';
 export {union} from './js/union.js';
 export {intersect} from './js/intersect.js';
+export {max} from './js/max.js';
+export {min} from './js/min.js';

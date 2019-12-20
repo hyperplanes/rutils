@@ -1,6 +1,6 @@
 {
   "name": "@hyperplanes/rutils",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A library of javascript functions that implement set and sequence-based operations in a style similar to R",
   "main": "src/index.js",
   "scripts": {

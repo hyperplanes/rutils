@@ -8,3 +8,4 @@ export {union} from './js/union.js';
 export {intersect} from './js/intersect.js';
 export {max} from './js/max.js';
 export {min} from './js/min.js';
+export {diff} from './js/diff.js';

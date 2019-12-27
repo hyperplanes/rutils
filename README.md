@@ -186,6 +186,20 @@ let result5=c===result4; //returns true because max returns the original object
 ### `min` - get the minimum value in an array
 `min(A)` returns the minimum value across its arguments. Works the same as `max` above.
 
+### `diff` - get lagged differences of an array
+`diff(A,{lag:n,differences:k})` returns an array of the `k`<sup>th</sup> differences in array `A` lagged by `n` places. The `lag` and `differences` parameters are optional, with default value of 1. They must be positive integers. `diff` also works on date objects but unlike R, will consistently return a result in miliseconds.
+
+```js
+let A=[1,2,3,2,4];
+let result1=diff(A); //returns [1,1,-1,2]
+let result2=diff(A,{differences:2}); //returns [0,-2,3]
+let result3=diff(A,{lag:2}); //returns [2,0,1]
+let result4=diff(A,{lag:2,differences:2}); //returns [-1]
+
+let B=[new Date(2019,1,1),new Date(2019,0,1),new Date(2019,2,1)];
+let result5=diff(B);// returns [-2678400000, 5097600000]
+```
+
 
 ## Running the tests
 

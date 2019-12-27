@@ -24,3 +24,9 @@ QUnit.test( "second differences, specify differences", function( assert ) {
 	let result=diff(A,{differences:2});
 	assert.deepEqual(result,[10,-11,1,10]);
 });
+
+QUnit.test( "first differences, datetimes, defaults", function( assert ) {
+	let A=[new Date(2019,1,1,1,1,0),new Date(2019,1,1,1,2,0)];
+	let result=diff(A);
+	assert.deepEqual(result,[60000]);
+});
